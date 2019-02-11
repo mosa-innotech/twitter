@@ -1,0 +1,99 @@
+* {
+  font-family: "Segoe UI",Arial,sans-serif; }
+
+#app {
+  background-color: #ededed; }
+
+.navbar-laravel {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.25);
+  height: 46px;
+  position: relative;
+  width: 100%; }
+
+.navbar-nav.mr-auto a {
+  margin-left: 10px;
+  margin-right: 10px;
+  color: #66757f;
+  font-weight: bold; }
+
+.navbar-nav.mr-auto a.active {
+  color: #1da1f2; }
+
+.align-right {
+  text-align: right; }
+
+.btn-twitter {
+  background-color: #1da1f2;
+  color: #fff;
+  font-weight: bold;
+  border-radius: 17px;
+  padding: 5px 17px; }
+
+.tweet-box .top-area {
+  padding: 20px;
+  background-color: #E8F5FD; }
+
+.tweet-box .images-container {
+  text-align: center; }
+  .tweet-box .images-container .profile-icon {
+    border-radius: 40px;
+    width: 40px;
+    margin: 8px auto; }
+
+.tweet-box .tweet-view-area {
+  margin-top: 2px;
+  background-color: #fff;
+  padding: 50px 40px; }
+  .tweet-box .tweet-view-area h1 {
+    font-size: 30px;
+    font-weight: bold; }
+  .tweet-box .tweet-view-area p {
+    color: #657786; }
+
+.tweet {
+  border-bottom: 1px solid #ccc;
+  padding: 10px 5px;
+  background-color: #fff;
+  color: #212121;
+  font-size: 11px; }
+  .tweet .user {
+    padding-right: 10px; }
+
+.single-comment {
+  padding: 10px 5px; }
+
+.home-instructions {
+  color: #fff;
+  background-color: #1da1f2;
+  padding: 160px 300px; }
+  .home-instructions h2 {
+    margin-bottom: 15px;
+    font-size: 18px; }
+
+.home-instructions-right {
+  padding: 60px 100px 60px 40px; }
+  .home-instructions-right .top-row img {
+    max-width: 80px; }
+  .home-instructions-right .top-row button {
+    display: block;
+    margin-left: auto; }
+  .home-instructions-right h1 {
+    font-size: 30px; }
+  .home-instructions-right h3 {
+    margin-top: 40px;
+    font-size: 20px; }
+
+header {
+  font-size: 20px;
+  color: blue;
+  border-bottom: 1px solid #ccc; }
+
+.btn-full-width {
+  width: 100%;
+  margin: 5px 0; }
+
+.potential-follower {
+  border: 1px solid #ccc;
+  padding: 10px;
+  color: #212121;
+  margin-top: 10px; }
