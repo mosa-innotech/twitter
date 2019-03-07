@@ -55,12 +55,15 @@
                                 </div>
                             </div>
                             <div class="col-xs-9 col-md-10">
-                                <form name="tweet-form" method="post" action="tweet">
+                                <form name="tweet-form" method="post" action="/tweet">
                                     @csrf
                                     <textarea name="tweet" class="form-control" placeholder="What's happening?"></textarea>
                                     <br />
                                     <div class="align-right">
-                                        <button class="btn btn-twitter align-right">Tweet</button>
+                                        <input type="submit" hidden />
+
+                                        <button type="submit" class="btn btn-twitter align-right">Tweet</button>
+
                                     </div>
                                 </form>
                             </div>

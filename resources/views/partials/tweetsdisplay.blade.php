@@ -2,28 +2,55 @@
 <div class="row">
     <div class="col-xs-12 col-md-12">
         <div class="tweet">
-            {{ $tweet->tweet }}
+            <div class="tweet-content">
+                {{ $tweet->tweet }}
+            </div>
+
             <br />
-            <div class="user align-right">
-                - {{  $tweet->user_id }} @ {{  $tweet->created_at }}
+             {{  $tweet->user->name }} @ {{  $tweet->created_at }}
+            @php
+            if(isset( $tweet->has_permissions)){
+                @endphp
+                    <a href="/edit-tweet/{{ $tweet->id }}"  class="float-left-section">Edit</a> |
 
+                    @php
+                    if(isset( $tweet->liked) && ($tweet->liked==true)){
+                    @endphp
+                    <form name="like-form" method="post" action="/like-tweet" class="float-left-section">
+                        @csrf
+                        <input type="hidden" name="tweet_id" value="{{ $tweet->id }}" />
+                        <input type="hidden" name="like" value="0" />
+                        <button class="btn btn-sm btn-twitter">Unlike</button>
+                    </form>
 
-                @php
-                if(isset( $tweet->can_delete)){
+                    @php
+                    }
+                    else{
+                    @endphp
+                    <form name="like-form" method="post" action="/like-tweet" class="float-left-section">
+                        @csrf
+                        <input type="hidden" name="tweet_id" value="{{ $tweet->id }}" />
+                        <input type="hidden" name="like" value="1" />
+                        <button class="btn btn-sm  btn-twitter">Like</button>
+                    </form>
+
+                    @php
+                    }
                     @endphp
 
-                        <form name="delete-form" method="post" action="/delete-tweet">
-                            @csrf
-                            <input type="hidden" name="_method"  value="DELETE"/>
-                            <input type="hidden" name="tweet_id" value="{{ $tweet->id }}" />
-                            <button class="btn btn-sm  btn-twitter">Delete</button>
-                        </form>
+                    <form name="delete-form" method="post" action="/delete-tweet" class="float-left-section">
+                        @csrf
+                        <input type="hidden" name="_method"  value="DELETE"/>
+                        <input type="hidden" name="tweet_id" value="{{ $tweet->id }}" />
+                        <button class="btn btn-sm  btn-twitter">Delete</button>
+                    </form>
+                    <br /><br />
+                @php
+            }
+            @endphp
 
-                        <br /><br />
-                    @php
-                }
-                @endphp
-
+            <br />
+            <div class="user align-right">
                 <div class="row">
                     <div class="col-md-11 offset-md-1">
                         @include('partials.commentsdisplay')
