@@ -18,5 +18,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::get('/users', 'UsersController@getAllUsers');
+
 Route::get('/tweets', 'TweetsController@getAllTweets');
+
+Route::get('/tweetsbynumber/{number}', 'TweetsController@getTweetsByNumber');
 Route::post('/tweets', 'TweetsController@saveTwe');

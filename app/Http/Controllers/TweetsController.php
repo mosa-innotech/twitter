@@ -31,6 +31,7 @@ class TweetsController extends Controller
      */
     public function index()
     {
+        $this->middleware('auth');
         $users = new User;
         $potentialFollowers = $users = $users->get();
         $user = Auth::user();
@@ -73,6 +74,7 @@ class TweetsController extends Controller
     }
 
     public function saveTweet(Request $request){
+        $this->middleware('auth');
         $user = Auth::user();
         $tweet = new Tweet;
         $tweet->user_id = $user->id;
@@ -123,8 +125,14 @@ class TweetsController extends Controller
        return redirect('home');
    }
 
-   public function getAllTweets(){
-       $tweets = Tweet::get();
-       return new TweetResource($tweets);
-   }
+    public function getAllTweets(){
+        $tweets = Tweet::get();
+        return new TweetResource($tweets);
+    }
+
+    public function getTweetsByNumber($number){
+        $tweets = Tweet::limit($number)->get();
+        return new TweetResource($tweets);
+    }
+
 }
