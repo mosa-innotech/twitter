@@ -9,6 +9,8 @@ use App\User;
 use App\UserDetails;
 use App\Follower;
 use Auth;
+use App\Http\Resources\Tweet as TweetResource;
+
 
 class TweetsController extends Controller
 {
@@ -19,7 +21,7 @@ class TweetsController extends Controller
      */
     public function __construct()
     {
-       $this->middleware('auth');
+       // $this->middleware('auth');
     }
 
     /**
@@ -119,5 +121,10 @@ class TweetsController extends Controller
        $tweetLike->like = $request->like;
        $tweetLike->save();
        return redirect('home');
+   }
+
+   public function getAllTweets(){
+       $tweets = Tweet::get();
+       return new TweetResource($tweets);
    }
 }

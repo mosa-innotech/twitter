@@ -1,0 +1,33 @@
+header {
+  background-color: #58a9db;
+  color: #fff;
+  font-size: 30px;
+  padding: 20px;
+  height: 90px; }
+  header img {
+    text-align: right;
+    width: 100px; }
+  header .text-right {
+    text-align: right; }
+
+.fold {
+  background: url("/images/milennials.jpg") no-repeat;
+  height: 300px;
+  background-size: cover; }
+
+.bird-fold {
+  background: url("/images/birds.gif") repeat;
+  height: 50px; }
+
+.brag {
+  text-align: center; }
+  .brag h2 {
+    margin-top: 20px;
+    font-size: 25px;
+    color: #1da1f2; }
+  .brag .typed {
+    margin-top: 15px;
+    font-size: 18px;
+    color: #212121; }
+  .brag .tlt {
+    font-size: 50px; }

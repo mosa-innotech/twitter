@@ -7,6 +7,7 @@ use App\User;
 use App\Follower;
 use App\Tweet;
 use Auth;
+use App\Http\Resources\User as UserResource;
 
 class UsersController extends Controller
 {
@@ -70,6 +71,13 @@ class UsersController extends Controller
             $user->save();
             return redirect('home');
     }
+
+
+    public function getAllUsers(){
+        $users = User::get();
+        return new UserResource($users);
+    }
+
 
 
 }

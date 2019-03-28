@@ -33,3 +33,7 @@ Route::post('/tweet', 'TweetsController@saveTweet')->name('savetweet');
 Route::post('/comment', 'TweetsController@saveComment')->name('savecomment');
 Route::delete('/delete-tweet', 'TweetsController@deleteTweet');
 Route::post('/follow', 'UsersController@follow');
+
+
+
+Route::view('/marketing', 'marketing');
