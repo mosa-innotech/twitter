@@ -42,7 +42,7 @@ class TweetsController extends Controller
         // $potentialFollowers = $users->whereIn("id" , $followers)->get();
         //$tweets = $tweet->whereIn("user_id", $followers)->get();
 
-        $tweets = Tweet::orderBy('created_at', 'desc')->get();
+        $tweets = Tweet::orderBy('created_at', 'desc')->limit(30)->get();
         $tweetsCollection = array();
 
         foreach($tweets as $tweet){
