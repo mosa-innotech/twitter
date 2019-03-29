@@ -22,4 +22,5 @@ Route::get('/users', 'UsersController@getAllUsers');
 Route::get('/tweets', 'TweetsController@getAllTweets');
 
 Route::get('/tweetsbynumber/{number}', 'TweetsController@getTweetsByNumber');
+Route::get('/tweetsbynumberfromlast/{number}/{last}', 'TweetsController@getTweetsByNumberFromLast');
 Route::post('/tweets', 'TweetsController@saveTwe');

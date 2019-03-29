@@ -74,10 +74,18 @@
                             <div class="row">
                                 <div class="col-md-12">
 
+
+                                    <div id="tweetsWrapper">
+
+                                        <tweet-component v-for="tweet in tweets" :tweet=tweet> </tweet-component>
+
+
+                                    </div>
+
                                     <?php
                                         if(isset($tweets) && ($tweets!==null)){
                                     ?>
-                                        @include('partials.tweetsdisplay')
+                                        {{-- @include('partials.tweetsdisplay') --}}
                                     <?php
                                         }
                                         else{

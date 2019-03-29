@@ -21,6 +21,8 @@ window.Vue = require('vue');
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
+Vue.component('tweet-component', require('./components/TweetComponent.vue').default);
+
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -28,8 +30,53 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-const app = new Vue({
-    el: '#app'
-});
+lastTweet = 0;
+const sdsdsdsd = new Vue({
+   el: '#tweetsWrapper',
+   data() {
+       return{
+            tweets: [],
+            lastTweet: 0,
+            tweetsObjectArray: {}
+       }
 
-alert();
+   },
+
+   methods: {
+       updateTweets(){
+           axios.get("/api/tweetsbynumber/3")
+               .then((response) => {
+                   for (var i = 0; i < (response.data.data).length; i++) {
+                       this.tweets.push(response.data.data[i]);
+                       lastTweet = response.data.data[i].id;
+
+                       this.tweetsObjectArray.(response.data.data[i].id) = response.data.data[i];
+                   }
+           });
+
+           console.log(this.tweetsObjectArray);
+       },
+
+       scroll(tweets){
+           window.onscroll = () => {
+               if ((window.innerHeight + window.scrollY) >= (document.body.offsetHeight -0.5)) {
+
+                   axios.get("/api/tweetsbynumberfromlast/3/" + lastTweet)
+                       .then((response) => {
+                           for (var i = 0; i < (response.data.data).length; i++) {
+
+                               this.tweets.push(response.data.data[i]);
+                                lastTweet = response.data.data[i].id;
+                           }
+                   });
+               }
+           };
+
+       }
+   },
+
+       mounted(){
+           this.updateTweets(this.tweets);
+           this.scroll();
+       }
+});

@@ -33,7 +33,7 @@ class TweetsController extends Controller
     {
         $this->middleware('auth');
         $users = new User;
-        $potentialFollowers = $users = $users->get();
+        $potentialFollowers = $users = $users->limit(10)->get();
         $user = Auth::user();
         $follower = new Follower;
         $followers = $follower->where("user_id" , $user->id)->where("following" , 1)->get(array('id'))->toArray();
@@ -42,7 +42,7 @@ class TweetsController extends Controller
         // $potentialFollowers = $users->whereIn("id" , $followers)->get();
         //$tweets = $tweet->whereIn("user_id", $followers)->get();
 
-        $tweets = Tweet::orderBy('created_at', 'desc')->get();
+        $tweets = Tweet::orderBy('created_at', 'desc')->limit(10)->get();
         $tweetsCollection = array();
 
         foreach($tweets as $tweet){
@@ -132,6 +132,11 @@ class TweetsController extends Controller
 
     public function getTweetsByNumber($number){
         $tweets = Tweet::limit($number)->get();
+        return new TweetResource($tweets);
+    }
+
+    public function getTweetsByNumberFromLast($number, $last){
+        $tweets = Tweet::where('id', '>', $last)->limit($number)->get();
         return new TweetResource($tweets);
     }
 
