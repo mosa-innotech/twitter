@@ -38,7 +38,7 @@
             </div>
             <div style=" margin-top: 20px; background-color: #fff; padding: 20px;">
                 <h2>People to follow</h2>
-                @include('partials.potentialfollowers')
+                {{-- @include('partials.potentialfollowers') --}}
             </div>
         </div>
         <div class="col-md-8">
@@ -77,7 +77,15 @@
                                     <?php
                                         if(isset($tweets) && ($tweets!==null)){
                                     ?>
-                                        @include('partials.tweetsdisplay')
+                                        {{-- @include('partials.tweetsdisplay') --}}
+
+
+                                        <div id="title">
+                                            @{{ title }}
+                                        </div>
+
+
+
                                     <?php
                                         }
                                         else{

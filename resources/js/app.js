@@ -32,4 +32,9 @@ const app = new Vue({
     el: '#app'
 });
 
-alert();
+const test = new Vue({
+      el: '#title',
+      data: {
+        title: 'Welcome to Vue.js'
+      }
+})
