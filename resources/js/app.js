@@ -33,8 +33,11 @@ const app = new Vue({
 });
 
 const test = new Vue({
-      el: '#title',
-      data: {
-        title: 'Welcome to Vue.js'
+      el: '#titleWrapper',
+      data() {
+          return{
+               title: "Me"
+          }
+
       }
 })

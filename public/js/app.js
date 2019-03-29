@@ -47966,9 +47966,11 @@ var app = new Vue({
   el: '#app'
 });
 var test = new Vue({
-  el: '#title',
-  data: {
-    title: 'Welcome to Vue.js'
+  el: '#titleWrapper',
+  data: function data() {
+    return {
+      title: "Me"
+    };
   }
 });
 

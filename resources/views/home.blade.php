@@ -80,11 +80,13 @@
                                         {{-- @include('partials.tweetsdisplay') --}}
 
 
-                                        <div id="title">
-                                            @{{ title }}
+                                        <div id="titleWrapper">
+                                            {{ title }}
                                         </div>
 
-
+                                        <example-component>
+                                            
+                                        </example-component>
 
                                     <?php
                                         }
