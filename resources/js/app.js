@@ -50,7 +50,7 @@ const sdsdsdsd = new Vue({
                        this.tweets.push(response.data.data[i]);
                        lastTweet = response.data.data[i].id;
 
-                       this.tweetsObjectArray.(response.data.data[i].id) = response.data.data[i];
+                       
                    }
            });
 
