@@ -80,13 +80,9 @@
                                         {{-- @include('partials.tweetsdisplay') --}}
 
 
-                                        <div id="titleWrapper">
-                                            {{ title }}
+                                        <div id="tweetsWrapper">
+                                            <tweet-component v-for="singletweet in tweets" :tweet=singletweet ></tweet-component>
                                         </div>
-
-                                        <example-component>
-                                            
-                                        </example-component>
 
                                     <?php
                                         }
@@ -124,4 +120,7 @@
     </div>
 
 </div>
-@endsection
+@endsections
+<script>
+    currentLoggedInUserUserId = {{ $user->id }};
+</script>

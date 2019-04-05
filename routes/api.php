@@ -18,8 +18,14 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::get('/users', 'UsersController@getAllUsers');
-
 Route::get('/tweets', 'TweetsController@getAllTweets');
-
 Route::get('/tweetsbynumber/{number}', 'TweetsController@getTweetsByNumber');
+Route::get('/tweet-comments/{tweetId}', 'TweetsController@getTweetComments');
+
+Route::get('/tweetsbynumberfromstartpoint/{number}/{id}',
+ 'TweetsController@getTweetsByNumberFromStartPoint');
+
+ Route::post('/like-tweet', 'TweetsController@likeTweetViaApi');
+ Route::post('/new-comment', 'TweetsController@newCommentViaApi');
+
 Route::post('/tweets', 'TweetsController@saveTwe');

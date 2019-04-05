@@ -10,6 +10,7 @@ use App\UserDetails;
 use App\Follower;
 use Auth;
 use App\Http\Resources\Tweet as TweetResource;
+use App\Http\Resources\Comment as CommentResource;
 
 
 class TweetsController extends Controller
@@ -69,7 +70,7 @@ class TweetsController extends Controller
 
         $tweets = $tweetsCollection;
 
-        return view('home', compact('tweets', 'potentialFollowers', 'sitename'));
+        return view('home', compact('tweets', 'potentialFollowers', 'sitename', 'user'));
 
     }
 
@@ -130,9 +131,96 @@ class TweetsController extends Controller
         return new TweetResource($tweets);
     }
 
-    public function getTweetsByNumber($number){
-        $tweets = Tweet::limit($number)->get();
+    public function getTweetsByNumber(Request $request, $number){
+        $tweets = Tweet::limit($number)->orderBy('id', 'DESC')->get();
+        $tweetsExtended = [];
+
+        $tweetLike = new Tweetlike;
+        foreach ($tweets as $tweet) {
+            $tweetId = $tweet["id"];
+            $tweetLikes = Tweetlike::limit(1)->where("tweet_id", "=", $tweetId)->where("user_id", "=", $request->user_id)->orderBy('id', 'DESC')->get();
+            $likedByUser = 0;
+            if(isset($tweetLikes[0]["like"])){
+                $likedByUser = $tweetLikes[0]["like"];
+            }
+            $tweet["liked_by_user"] = $likedByUser;
+            $totalTweetsCount = Tweetlike::distinct('user_id')->where("tweet_id", "=", $tweetId)->where("like", "=", "1")->get();
+            $tweet["number_of_likes"] = count($totalTweetsCount);
+
+            $tweetsExtended[] = $tweet;
+        }
+
+        $tweets = $tweetsExtended;
         return new TweetResource($tweets);
     }
+
+    public function getTweetsByNumberFromStartPoint(Request $request, $number, $id){
+        $tweets = Tweet::limit($number)->where("id", "<", $id)->orderBy('id', 'DESC')->get();
+        $tweetsExtended = [];
+
+        $tweetLike = new Tweetlike;
+        foreach ($tweets as $tweet) {
+            $tweetId = $tweet["id"];
+            $tweetLikes = Tweetlike::limit(1)->where("tweet_id", "=", $tweetId)->where("user_id", "=", $request->user_id)->orderBy('id', 'DESC')->get();
+            $likedByUser = 0;
+            if(isset($tweetLikes[0]["like"])){
+                $likedByUser = $tweetLikes[0]["like"];
+            }
+            $tweet["liked_by_user"] = $likedByUser;
+            $totalTweetsCount = Tweetlike::distinct('user_id')->
+            where("tweet_id", "=", $tweetId)->where("like", "=", "1")->get();
+            $tweet["number_of_likes"] = count($totalTweetsCount);
+            $tweetsExtended[] = $tweet;
+        }
+
+        $tweets = $tweetsExtended;
+        return new TweetResource($tweets);
+    }
+
+   public function likeTweetViaApi(Request $request){
+       $tweetLike = new Tweetlike;
+
+        $previousTweetLike = Tweetlike::limit(1)->where("user_id", "=", $request->user_id)->where("tweet_id", "=", $request->tweet_id)->orderBy('id', 'DESC')->get();
+        if(count($previousTweetLike) == 0){
+            $tweetLike->user_id = $request->user_id;
+            $tweetLike->tweet_id = $request->tweet_id;
+            $tweetLike->like = $request->like;
+
+            if($tweetLike->save()){
+                return '{"success": "1"}';
+            }
+
+            else{
+                return '{"success": "0"}';
+            }
+        }
+        else{
+            $tweetLikeId = $previousTweetLike[0]["id"];
+            $previousTweetLike = TweetLike::find($tweetLikeId);
+            $previousTweetLike->like = $request->like;
+            $previousTweetLike->save();
+            return '{"success": "1"}';
+        }
+   }
+
+   public function getTweetComments($tweetId){
+       $comments = Comment::where("tweet_id", "=", $tweetId)->get();
+       return new CommentResource($comments);
+   }
+
+
+   public function newCommentViaApi(Request $request){
+       $comment = new Comment;
+       $comment->user_id = $request->user_id;
+       $comment->tweet_id = $request->tweet_id;
+       $comment->comment = $request->comment;
+       if($request->comment){
+           $comment->save();
+           return '{"success": "1"}';
+       }
+       else{
+           return '{"success": "0"}';
+       }
+   }
 
 }

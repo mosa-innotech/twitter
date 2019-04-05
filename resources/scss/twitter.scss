@@ -29,6 +29,23 @@
     border-radius: 17px;
     padding: 5px 17px;
 }
+#tweetsWrapper .tweet img{
+    width: 30px;
+}
+.btn-sm.btn-twitter{
+    padding: 3px 14px;
+    font-size: 9px;
+    border-radius: 5px;
+    margin-top: 5px;
+}
+
+.likeUnlikeBtn{
+    display: none;
+}
+.displaying{
+    display: inline-block;
+}
+
 .tweet-box{
 
     .top-area{
@@ -137,4 +154,10 @@ header{
             padding-bottom: 5px;
         }
     }
+}
+.comment-display{
+    font-style: italic;
+}
+.comment-meta{
+    font-size: 12px;
 }

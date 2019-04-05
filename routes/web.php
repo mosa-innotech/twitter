@@ -17,7 +17,7 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', 'TweetsController@index')->name('homepage');
+Route::get('/home', 'TweetsController@index')->name('homepage')->middleware("auth");
 Route::get('/edit-profile', 'UsersController@editProfileDisplay');
 Route::post('/edit-profile', 'UsersController@editProfile');
 
